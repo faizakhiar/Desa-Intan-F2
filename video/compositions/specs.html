@@ -1,0 +1,94 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #F3F0E8; font-family: "Montserrat", sans-serif; }
+    #s-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(27,42,29,.06) 2px, transparent 2px), linear-gradient(90deg, rgba(27,42,29,.06) 2px, transparent 2px); background-size: 60px 60px; }
+    #s-photo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; }
+    #s-img { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+    #s-photo-shade { position: absolute; inset: 0; background: rgba(10,20,12,.25); }
+    #s-stamp { position: absolute; left: 160px; top: 520px; width: 730px; padding: 30px 0 34px; border: 14px solid #FFC24B; border-radius: 26px; text-align: center; background: rgba(20,24,20,.55); }
+    #s-stamp-1 { font-weight: 900; font-size: 104px; color: #FFC24B; letter-spacing: .02em; line-height: 1; }
+    #s-stamp-2 { font-weight: 800; font-size: 40px; color: #fff; letter-spacing: .3em; margin-top: 12px; }
+    #s-card { position: absolute; left: 100px; top: 300px; width: 382px; height: 820px; border-radius: 30px; background: #fff; box-shadow: 0 20px 60px rgba(27,42,29,.18); }
+    #s-plan { position: absolute; left: 60px; top: 50px; width: 375px; height: 1045px; transform: scale(.7); transform-origin: 0 0; }
+    #s-crop { position: absolute; left: 0; top: 0; width: 375px; height: 1045px; overflow: hidden; }
+    #s-crop img { position: absolute; left: -180px; top: -190px; width: 1080px; height: 1336px; }
+    .s-room { position: absolute; border-radius: 8px; }
+    .s-bed { background: rgba(255,194,75,.55); border: 6px solid #E89B00; }
+    .s-bath { background: rgba(64,150,230,.5); border: 6px solid #1f6fd1; }
+    #s-area { position: absolute; left: 15px; top: 15px; width: 345px; height: 675px; background: repeating-linear-gradient(45deg, rgba(47,191,113,.45) 0 14px, rgba(47,191,113,.18) 14px 28px); border: 6px solid #1e9a58; transform-origin: 50% 0; }
+    .s-dim { position: absolute; background: #1b2a1d; }
+    #s-dimw { left: 15px; top: -42px; width: 345px; height: 6px; transform-origin: 0 50%; }
+    #s-dimh { left: -44px; top: 15px; width: 6px; height: 1035px; transform-origin: 50% 0; }
+    .s-chips { position: absolute; left: 495px; top: 300px; width: 380px; }
+    .s-chip { position: absolute; left: 0; width: 380px; border-radius: 26px; padding: 22px 26px; color: #1b2a1d; }
+    .s-num { font-weight: 900; font-size: 110px; line-height: .9; letter-spacing: -0.03em; }
+    .s-lbl { font-weight: 800; font-size: 38px; line-height: 1.05; margin-top: 6px; }
+    #s-c1 { top: 0; background: #FFC24B; }
+    #s-c2 { top: 230px; background: #9fd0ff; }
+    #s-c3 { top: 460px; background: #1b2a1d; color: #fff; }
+    #s-c3 .s-num { font-size: 84px; }
+    #s-c4 { top: 650px; background: #b9e27a; }
+    #s-c4 .s-num { font-size: 84px; }
+    #s-c4 .s-lbl, #s-c3 .s-lbl { font-size: 32px; }
+  </style>
+  <div id="root" data-composition-id="specs" data-width="1080" data-height="1920">
+    <div id="s-grid"></div>
+    <div id="s-card">
+      <div id="s-plan">
+        <div id="s-crop"><img src="assets/img/plan.jpg" alt="" /></div>
+        <div id="s-area"></div>
+        <div class="s-room s-bed" id="s-b2" style="left:185px;top:15px;width:170px;height:125px"></div>
+        <div class="s-room s-bed" id="s-b1" style="left:185px;top:140px;width:170px;height:185px"></div>
+        <div class="s-room s-bed" id="s-bm" style="left:185px;top:495px;width:170px;height:195px"></div>
+        <div class="s-room s-bath" id="s-ba2" style="left:195px;top:325px;width:160px;height:75px"></div>
+        <div class="s-room s-bath" id="s-ba1" style="left:195px;top:400px;width:160px;height:93px"></div>
+        <div class="s-dim" id="s-dimw"></div>
+        <div class="s-dim" id="s-dimh"></div>
+      </div>
+    </div>
+    <div class="s-chips">
+      <div class="s-chip" id="s-c1"><div class="s-num">3</div><div class="s-lbl">BILIK TIDUR</div></div>
+      <div class="s-chip" id="s-c2"><div class="s-num">2</div><div class="s-lbl">BILIK AIR</div></div>
+      <div class="s-chip" id="s-c3"><div class="s-num">20'×60'</div><div class="s-lbl">SAIZ TANAH</div></div>
+      <div class="s-chip" id="s-c4"><div class="s-num" id="s-count">1,000</div><div class="s-lbl">KPS KELUASAN BINAAN</div></div>
+    </div>
+    <div id="s-photo">
+      <img id="s-img" src="assets/img/corner.jpg" alt="" />
+      <div id="s-photo-shade"></div>
+      <div id="s-stamp"><div id="s-stamp-1">FREEHOLD</div><div id="s-stamp-2">PEGANGAN KEKAL</div></div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // white flash-cut in, photo of the corner unit
+    tl.fromTo("#s-img", { scale: 1.18 }, { scale: 1.04, duration: 1.6, ease: "power2.out" }, 0);
+    tl.fromTo("#s-photo-shade", { background: "rgba(255,255,255,1)" }, { background: "rgba(10,20,12,.25)", duration: 0.25, ease: "power2.out" }, 0);
+    // "freehold" — stamp slams
+    tl.fromTo("#s-stamp", { scale: 2.4, rotation: 4, opacity: 0 }, { scale: 1, rotation: -5, opacity: 1, duration: 0.22, ease: "power4.in" }, 0.36);
+    tl.fromTo("#s-photo", { x: 0 }, { x: 14, duration: 0.05, yoyo: true, repeat: 3, ease: "none" }, 0.58);
+    // photo peels away to the plan (before "3 bilik tidur")
+    tl.fromTo("#s-photo", { clipPath: "inset(0% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.45, ease: "power3.inOut" }, 1.05);
+    tl.fromTo("#s-card", { y: 160, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 1.15);
+    // "3 bilik tidur"
+    tl.fromTo(["#s-b2", "#s-b1", "#s-bm"], { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, stagger: 0.12, ease: "back.out(2)" }, 1.55);
+    tl.fromTo("#s-c1", { x: 420, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "power4.out" }, 1.53);
+    // "2 bilik air"
+    tl.fromTo(["#s-ba2", "#s-ba1"], { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, stagger: 0.12, ease: "back.out(2)" }, 2.81);
+    tl.fromTo("#s-c2", { x: 420, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "power4.out" }, 2.8);
+    // "saiz tanah 20x60" — rooms fade back, dimensions draw
+    tl.fromTo([".s-bed", ".s-bath"], { opacity: 1 }, { opacity: 0.25, duration: 0.3 }, 4.2);
+    tl.fromTo("#s-dimw", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 4.38);
+    tl.fromTo("#s-dimh", { scaleY: 0 }, { scaleY: 1, duration: 0.7, ease: "power3.out" }, 4.5);
+    tl.fromTo("#s-c3", { x: 420, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "power4.out" }, 4.4);
+    // "keluasan binaan 1000 kaki persegi" — built-up area fills, count-up
+    tl.fromTo("#s-area", { scaleY: 0, opacity: 1 }, { scaleY: 1, opacity: 1, duration: 0.9, ease: "power2.inOut" }, 6.5);
+    tl.fromTo("#s-c4", { x: 420, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "power4.out" }, 6.45);
+    const counter = { v: 0 };
+    tl.fromTo(counter, { v: 0 }, { v: 1000, duration: 1.1, ease: "power2.out", onUpdate: () => {
+      document.querySelector("#s-count").textContent = Math.round(counter.v).toLocaleString("en-US");
+    } }, 6.5);
+    // exit: everything slides left
+    tl.fromTo(["#s-card", ".s-chips"], { x: 0 }, { x: -1100, duration: 0.35, ease: "power3.in", stagger: 0.04 }, 8.5);
+    window.__timelines["specs"] = tl;
+  </script>
+</template>

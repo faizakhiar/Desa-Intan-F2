@@ -1,0 +1,48 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0f1a14; font-family: "Montserrat", sans-serif; }
+    #c-img { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+    #c-shade { position: absolute; inset: 0; background: rgba(8,16,12,.62); }
+    #c-q1 { position: absolute; left: 120px; top: 300px; font-weight: 800; font-size: 44px; color: rgba(255,255,255,.85); }
+    #c-q2 { position: absolute; left: 120px; top: 360px; font-weight: 900; font-size: 84px; line-height: .98; color: #fff; letter-spacing: -0.02em; }
+    .c-opt { position: absolute; left: 130px; width: 740px; height: 140px; border-radius: 70px; background: rgba(255,255,255,.96); display: flex; align-items: center; gap: 26px; padding: 0 34px; }
+    .c-ic { width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; flex: none; }
+    .c-ic svg { width: 48px; height: 48px; }
+    .c-t { font-weight: 900; font-size: 44px; color: #1b2a1d; flex: 1; }
+    .c-radio { width: 56px; height: 56px; border-radius: 50%; border: 7px solid #1b2a1d; flex: none; }
+    #c-o1 { top: 600px; } #c-o1 .c-ic { background: #FFC24B; }
+    #c-o2 { top: 770px; } #c-o2 .c-ic { background: #9fd0ff; }
+    #c-o3 { top: 940px; } #c-o3 .c-ic { background: #b9e27a; }
+    #c-cm { position: absolute; left: 120px; top: 1110px; display: flex; align-items: center; gap: 18px; font-weight: 900; font-size: 48px; color: #FFC24B; }
+    #c-cm svg { width: 60px; height: 60px; }
+  </style>
+  <div id="root" data-composition-id="cta" data-width="1080" data-height="1920">
+    <img id="c-img" src="assets/img/street.jpg" alt="" />
+    <div id="c-shade"></div>
+    <div id="c-q1">Kalau diberi pilihan…</div>
+    <div id="c-q2">KORANG LEBIH<br/>UTAMAKAN?</div>
+    <div class="c-opt" id="c-o1"><div class="c-ic"><svg viewBox="0 0 48 48"><text x="24" y="35" font-size="30" font-weight="900" text-anchor="middle" fill="#1b2a1d" font-family="Montserrat">RM</text></svg></div><div class="c-t">HARGA</div><div class="c-radio"></div></div>
+    <div class="c-opt" id="c-o2"><div class="c-ic"><svg viewBox="0 0 48 48"><path d="M24 46 C24 46 6 26 6 17 A18 18 0 0 1 42 17 C42 26 24 46 24 46Z" fill="#1b2a1d"/><circle cx="24" cy="17" r="6" fill="#9fd0ff"/></svg></div><div class="c-t">LOKASI</div><div class="c-radio"></div></div>
+    <div class="c-opt" id="c-o3"><div class="c-ic"><svg viewBox="0 0 48 48"><path d="M2 44 L18 12 L28 30 L34 22 L46 44 Z" fill="#1b2a1d"/></svg></div><div class="c-t">KEADAAN KAWASAN</div><div class="c-radio"></div></div>
+    <div id="c-cm"><svg viewBox="0 0 60 60"><path d="M30 6 V48 M12 32 L30 52 L48 32" stroke="#FFC24B" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Jawab dekat komen</div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#c-img", { scale: 1.0 }, { scale: 1.12, duration: 7.7, ease: "none" }, 0);
+    tl.fromTo("#c-shade", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0);
+    tl.fromTo("#c-q1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 0.3);
+    tl.fromTo("#c-q2", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.4, ease: "power4.out" }, 2.15);
+    tl.fromTo("#c-o1", { x: -900 }, { x: 0, duration: 0.4, ease: "power4.out" }, 3.18);
+    tl.fromTo("#c-o2", { x: -900 }, { x: 0, duration: 0.4, ease: "power4.out" }, 4.08);
+    tl.fromTo("#c-o3", { x: -900 }, { x: 0, duration: 0.4, ease: "power4.out" }, 5.15);
+    // radios tick one after another — "pilih satu"
+    tl.fromTo("#c-o1 .c-radio", { background: "rgba(0,0,0,0)" }, { background: "#FFC24B", duration: 0.12 }, 6.4);
+    tl.fromTo("#c-o1 .c-radio", { background: "#FFC24B" }, { background: "rgba(0,0,0,0)", duration: 0.12, immediateRender: false }, 6.7);
+    tl.fromTo("#c-o2 .c-radio", { background: "rgba(0,0,0,0)" }, { background: "#9fd0ff", duration: 0.12 }, 6.7);
+    tl.fromTo("#c-o2 .c-radio", { background: "#9fd0ff" }, { background: "rgba(0,0,0,0)", duration: 0.12, immediateRender: false }, 7.0);
+    tl.fromTo("#c-o3 .c-radio", { background: "rgba(0,0,0,0)" }, { background: "#b9e27a", duration: 0.12 }, 7.0);
+    tl.fromTo("#c-cm", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)" }, 6.4);
+    tl.fromTo("#c-cm svg", { y: 0 }, { y: 12, duration: 0.3, yoyo: true, repeat: 3, ease: "sine.inOut" }, 6.75);
+    window.__timelines["cta"] = tl;
+  </script>
+</template>

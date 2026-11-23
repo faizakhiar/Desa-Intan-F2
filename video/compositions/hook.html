@@ -1,0 +1,90 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0d1418; font-family: "Montserrat", sans-serif; }
+    .h-panel { position: absolute; left: 0; width: 1080px; height: 960px; overflow: hidden; }
+    #h-top { top: 0; }
+    #h-bot { top: 960px; }
+    .h-img { position: absolute; left: 0; top: 0; width: 1080px; height: 960px; object-fit: cover; }
+    #h-top-img { object-position: 50% 60%; }
+    #h-bot-img { object-position: 50% 58%; }
+    .h-shade { position: absolute; inset: 0; }
+    #h-top-shade { background: linear-gradient(180deg, rgba(10,25,40,.55) 0%, rgba(10,25,40,.05) 45%, rgba(10,25,40,.25) 100%); }
+    #h-bot-shade { background: linear-gradient(0deg, rgba(10,20,10,.55) 0%, rgba(10,20,10,0) 55%); }
+    #h-water { position: absolute; left: -60px; top: 0; width: 1200px; height: 960px; }
+    .h-water-body { position: absolute; left: 0; top: 40px; width: 1200px; height: 1000px; background: linear-gradient(180deg, rgba(64,150,230,.82), rgba(22,70,130,.92)); }
+    .h-wave { position: absolute; left: 0; top: 0; width: 2400px; height: 48px; }
+    .h-label { position: absolute; left: 120px; display: flex; align-items: center; gap: 18px; }
+    .h-tag { width: 84px; height: 84px; border-radius: 22px; display: grid; place-items: center; font-weight: 900; font-size: 54px; color: #0d1418; }
+    .h-txt { font-weight: 900; font-size: 60px; color: #fff; letter-spacing: -0.01em; text-shadow: 0 4px 24px rgba(0,0,0,.45); }
+    #h-lab-top { top: 300px; }
+    #h-lab-top .h-tag { background: #7cc3ff; }
+    #h-lab-bot { top: 1000px; }
+    #h-lab-bot .h-tag { background: #b9e27a; }
+    #h-mid { position: absolute; left: 0; top: 960px; width: 1080px; height: 0; }
+    #h-line { position: absolute; left: 0; top: -5px; width: 1080px; height: 10px; background: #fff; }
+    #h-chip { position: absolute; left: 290px; top: -58px; width: 500px; height: 116px; border-radius: 58px; background: #FFC24B; color: #1b1b1b; display: flex; align-items: center; justify-content: center; gap: 18px; font-weight: 900; font-size: 46px; box-shadow: 0 12px 40px rgba(0,0,0,.35); }
+    #h-chip svg { width: 56px; height: 56px; }
+    #h-arrow { position: absolute; left: 820px; top: 1060px; width: 120px; height: 150px; }
+    #h-q { position: absolute; left: 340px; top: 560px; width: 400px; height: 400px; border-radius: 50%; background: #fff; color: #0d1418; display: grid; place-items: center; font-weight: 900; font-size: 300px; line-height: 1; box-shadow: 0 20px 80px rgba(0,0,0,.5); }
+    #h-flood { position: absolute; left: -60px; top: 0; width: 1200px; height: 2100px; }
+    #h-flood .h-water-body { height: 2100px; background: linear-gradient(180deg, rgba(64,150,230,.96), rgba(18,60,115,1)); }
+  </style>
+  <div id="root" data-composition-id="hook" data-width="1080" data-height="1920">
+    <div id="h-top" class="h-panel">
+      <img id="h-top-img" class="h-img" src="assets/img/front.jpg" alt="" />
+      <div id="h-top-shade" class="h-shade"></div>
+      <div id="h-water">
+        <svg class="h-wave" id="h-wave1" viewBox="0 0 2400 48" preserveAspectRatio="none"><path d="M0 40 Q 75 0 150 40 T 300 40 T 450 40 T 600 40 T 750 40 T 900 40 T 1050 40 T 1200 40 T 1350 40 T 1500 40 T 1650 40 T 1800 40 T 1950 40 T 2100 40 T 2250 40 T 2400 40 V48 H0Z" fill="rgba(120,190,255,.9)"/></svg>
+        <div class="h-water-body"></div>
+      </div>
+    </div>
+    <div id="h-bot" class="h-panel">
+      <img id="h-bot-img" class="h-img" src="assets/img/street.jpg" alt="" />
+      <div id="h-bot-shade" class="h-shade"></div>
+    </div>
+    <div id="h-lab-top" class="h-label"><div class="h-tag">A</div><div class="h-txt">KAWASAN RENDAH</div></div>
+    <div id="h-lab-bot" class="h-label"><div class="h-tag">B</div><div class="h-txt">ATAS BUKIT</div></div>
+    <svg id="h-arrow" viewBox="0 0 120 150"><path d="M60 140 V20 M18 60 L60 16 L102 60" stroke="#b9e27a" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div id="h-mid">
+      <div id="h-line"></div>
+      <div id="h-chip">
+        <svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#1b1b1b"/><path d="M15 22h26M15 34h26" stroke="#FFC24B" stroke-width="6" stroke-linecap="round"/></svg>
+        <span>HARGA SAMA</span>
+      </div>
+    </div>
+    <div id="h-q">?</div>
+    <div id="h-flood">
+      <svg class="h-wave" id="h-wave2" viewBox="0 0 2400 48" preserveAspectRatio="none"><path d="M0 40 Q 75 0 150 40 T 300 40 T 450 40 T 600 40 T 750 40 T 900 40 T 1050 40 T 1200 40 T 1350 40 T 1500 40 T 1650 40 T 1800 40 T 1950 40 T 2100 40 T 2250 40 T 2400 40 V48 H0Z" fill="rgba(120,190,255,.96)"/></svg>
+      <div class="h-water-body"></div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // frame 0: both choices already on screen (thumbnail = hook)
+    tl.fromTo("#h-top-img", { scale: 1.12 }, { scale: 1.0, duration: 7.25, ease: "none" }, 0);
+    tl.fromTo("#h-bot-img", { scale: 1.0 }, { scale: 1.1, duration: 7.25, ease: "none" }, 0);
+    tl.fromTo("#h-lab-top", { x: 0, opacity: 1 }, { x: 0, opacity: 1, duration: 0.01 }, 0);
+    tl.fromTo("#h-lab-bot", { x: 0, opacity: 1 }, { x: 0, opacity: 1, duration: 0.01 }, 0);
+    // "harga lebih kurang sama" — chip stamps on the seam
+    tl.fromTo("#h-line", { scaleX: 0.0 }, { scaleX: 1, duration: 0.35, ease: "power3.out" }, 0.0);
+    tl.fromTo("#h-chip", { scale: 0.4, opacity: 0, rotation: -8 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.45, ease: "back.out(2.2)" }, 0.72);
+    // "kawasan rendah" — water rises in panel A
+    tl.fromTo("#h-water", { y: 960 }, { y: 520, duration: 1.4, ease: "power2.out" }, 3.2);
+    tl.fromTo("#h-wave1", { x: 0 }, { x: -600, duration: 7.25, ease: "none" }, 0);
+    tl.fromTo("#h-lab-top .h-tag", { scale: 1 }, { scale: 1.25, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" }, 3.4);
+    tl.fromTo("#h-lab-bot", { opacity: 1 }, { opacity: 0.55, duration: 0.3 }, 3.3);
+    // "atas bukit" — panel B lifts, arrow up
+    tl.fromTo("#h-lab-bot", { opacity: 0.55 }, { opacity: 1, duration: 0.2 }, 5.0);
+    tl.fromTo("#h-lab-bot .h-tag", { scale: 1 }, { scale: 1.25, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" }, 5.05);
+    tl.fromTo("#h-arrow", { y: 60, opacity: 0 }, { y: -10, opacity: 1, duration: 0.5, ease: "back.out(2)" }, 5.0);
+    tl.fromTo("#h-bot", { y: 0 }, { y: -40, duration: 0.6, ease: "power2.out" }, 5.0);
+    // "yang mana korang akan pilih?" — question pops
+    tl.fromTo("#h-chip", { opacity: 1 }, { opacity: 0, duration: 0.15 }, 5.8);
+    tl.fromTo("#h-q", { scale: 0, rotation: -25, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.5, ease: "back.out(2.4)" }, 5.85);
+    tl.fromTo("#h-q", { rotation: 0 }, { rotation: 8, duration: 0.25, yoyo: true, repeat: 2, ease: "sine.inOut" }, 6.4);
+    // flood wipe into next scene
+    tl.fromTo("#h-flood", { y: 1950 }, { y: -60, duration: 0.42, ease: "power3.in" }, 6.83);
+    tl.fromTo("#h-wave2", { x: 0 }, { x: -300, duration: 0.42, ease: "none" }, 6.83);
+    window.__timelines["hook"] = tl;
+  </script>
+</template>

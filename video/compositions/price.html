@@ -1,0 +1,62 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #14110b; font-family: "Montserrat", sans-serif; }
+    #r-img { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+    #r-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,12,8,.72), rgba(14,12,8,.5) 55%, rgba(14,12,8,.8)); }
+    #r-printer { position: absolute; left: 130px; top: 290px; width: 820px; height: 54px; border-radius: 27px; background: #1b2a1d; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+    #r-slot { position: absolute; left: 40px; top: 22px; width: 740px; height: 10px; border-radius: 5px; background: #000; }
+    #r-paperwrap { position: absolute; left: 160px; top: 318px; width: 760px; height: 800px; overflow: hidden; }
+    #r-paper { position: absolute; left: 0; top: 0; width: 760px; height: 780px; background: #FFFDF6; padding: 50px 46px 0; color: #1b1b1b; }
+    #r-paper::after { content: ""; position: absolute; left: 0; bottom: -18px; width: 760px; height: 20px; background: radial-gradient(circle at 10px 0, #FFFDF6 10px, transparent 11px) 0 0 / 20px 20px repeat-x; }
+    #r-h { font-weight: 800; font-size: 34px; letter-spacing: .25em; color: #7a6f5a; }
+    #r-big { font-weight: 900; font-size: 140px; letter-spacing: -0.04em; line-height: 1; margin-top: 8px; }
+    #r-big small { font-size: 64px; letter-spacing: 0; margin-right: 6px; }
+    .r-sep { height: 0; border-top: 5px dashed #d9d0bb; margin: 26px 0 8px; }
+    .r-row { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; border-bottom: 3px dotted #e2dac8; }
+    .r-k { font-weight: 700; font-size: 36px; color: #3d3a33; }
+    .r-v { font-weight: 900; font-size: 40px; padding: 8px 18px; border-radius: 12px; }
+    #r-v1 { background: #FFC24B; }
+    #r-v2 { background: #b9e27a; font-size: 32px; }
+    #r-v3 { background: #1b2a1d; color: #fff; }
+    #r-note { font-weight: 700; font-size: 28px; color: #7a6f5a; margin-top: 14px; text-align: right; }
+  </style>
+  <div id="root" data-composition-id="price" data-width="1080" data-height="1920">
+    <img id="r-img" src="assets/img/corner.jpg" alt="" />
+    <div id="r-shade"></div>
+    <div id="r-paperwrap">
+      <div id="r-paper">
+        <div id="r-h">HARGA BERMULA</div>
+        <div id="r-big"><small>RM</small><span id="r-num">405,000</span></div>
+        <div class="r-sep"></div>
+        <div class="r-row" id="r-row1"><span class="r-k">Booking</span><span class="r-v" id="r-v1">RM500 sahaja</span></div>
+        <div class="r-row" id="r-row2"><span class="r-k">Kos guaman SPA</span><span class="r-v" id="r-v2">DITANGGUNG PEMAJU</span></div>
+        <div class="r-row" id="r-row3"><span class="r-k">MOT</span><span class="r-v" id="r-v3">PERCUMA*</span></div>
+        <div id="r-note">*untuk rumah pertama</div>
+      </div>
+    </div>
+    <div id="r-printer"><div id="r-slot"></div></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#r-img", { scale: 1.25 }, { scale: 1.05, duration: 10.1, ease: "none" }, 0);
+    tl.fromTo("#r-printer", { y: -200, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 0);
+    // receipt prints in steps, each step lands as the voice names it
+    // receipt prints downward; each step lands as the voice names it
+    tl.fromTo("#r-paperwrap", { clipPath: "inset(0px 0px 100% 0px)" }, { clipPath: "inset(0px 0px 66% 0px)", duration: 0.45, ease: "power2.out" }, 0.1);   // "harga bermula"
+    const n = { v: 0 };
+    tl.fromTo(n, { v: 0 }, { v: 405000, duration: 1.3, ease: "power3.out", onUpdate: () => {
+      document.querySelector("#r-num").textContent = (Math.round(n.v / 1000) * 1000).toLocaleString("en-US");
+    } }, 0.62);
+    tl.fromTo("#r-big", { scale: 1.08 }, { scale: 1, duration: 0.25, ease: "back.out(3)", transformOrigin: "0% 50%" }, 1.92);
+    tl.fromTo("#r-paperwrap", { clipPath: "inset(0px 0px 66% 0px)" }, { clipPath: "inset(0px 0px 52% 0px)", duration: 0.3, ease: "power2.out", immediateRender: false }, 2.72);   // booking
+    tl.fromTo("#r-v1", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.5)" }, 3.6);
+    tl.fromTo("#r-paperwrap", { clipPath: "inset(0px 0px 52% 0px)" }, { clipPath: "inset(0px 0px 36% 0px)", duration: 0.3, ease: "power2.out", immediateRender: false }, 4.95);   // SPA
+    tl.fromTo("#r-v2", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.5)" }, 6.46);
+    tl.fromTo("#r-paperwrap", { clipPath: "inset(0px 0px 36% 0px)" }, { clipPath: "inset(0px 0px 0% 0px)", duration: 0.4, ease: "power2.out", immediateRender: false }, 7.8);       // MOT
+    tl.fromTo("#r-v3", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.5)" }, 8.3);
+    tl.fromTo("#r-note", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 8.95);
+    // exit: tear off upward
+    tl.fromTo(["#r-paperwrap", "#r-printer"], { y: 0, rotation: 0 }, { y: -1300, rotation: -6, duration: 0.35, ease: "power3.in" }, 9.8);
+    window.__timelines["price"] = tl;
+  </script>
+</template>
