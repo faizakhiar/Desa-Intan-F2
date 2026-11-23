@@ -2,9 +2,14 @@
   <style>
     #root { position: absolute; inset: 0; overflow: hidden; background: #0d1418; font-family: "Montserrat", sans-serif; }
     .h-panel { position: absolute; left: 0; width: 1080px; height: 960px; overflow: hidden; }
-    #h-top { top: 0; background: linear-gradient(180deg, #8fb8de 0%, #cfe3f1 60%, #e8efe4 100%); }
+    #h-top { top: 0; background: #22303a; }
+    #h-photo { position: absolute; left: 0; top: 0; width: 1080px; height: 960px; object-fit: cover; }
+    #h-top-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,18,28,.6) 0%, rgba(8,18,28,.1) 45%, rgba(8,18,28,.35) 100%); }
+    #h-level { position: absolute; left: 0; top: 0; width: 1080px; height: 960px; }
+    #h-level-line { position: absolute; left: 0; top: 0; width: 1080px; height: 6px; background: #FF5A4E; box-shadow: 0 0 18px rgba(255,90,78,.8); }
+    #h-level-tag { position: absolute; right: 200px; top: -58px; padding: 8px 16px; border-radius: 10px; background: #FF5A4E; color: #fff; font-weight: 900; font-size: 30px; }
+    #h-credit { position: absolute; left: 120px; top: 900px; padding: 3px 9px; border-radius: 6px; background: rgba(0,0,0,.55); color: rgba(255,255,255,.8); font-weight: 600; font-size: 18px; }
     #h-bot { top: 960px; }
-    #h-illo { position: absolute; left: 0; top: 0; width: 1080px; height: 960px; }
     #h-vwrap { position: absolute; left: 0; top: 0; width: 1080px; height: 960px; }
     #h-vid { position: absolute; left: 0; top: 0; width: 1080px; height: 960px; object-fit: cover; }
     #h-bot-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,20,10,.5) 0%, rgba(10,20,10,0) 35%); }
@@ -12,8 +17,7 @@
     .h-tag { width: 84px; height: 84px; border-radius: 22px; display: grid; place-items: center; font-weight: 900; font-size: 54px; color: #0d1418; }
     .h-txt { font-weight: 900; font-size: 60px; color: #fff; letter-spacing: -0.01em; text-shadow: 0 4px 24px rgba(0,0,0,.45); }
     #h-lab-top { top: 300px; }
-    #h-lab-top .h-txt { color: #10324f; text-shadow: none; }
-    #h-lab-top .h-tag { background: #2D8CFF; color: #fff; }
+        #h-lab-top .h-tag { background: #2D8CFF; color: #fff; }
     #h-lab-bot { top: 1000px; }
     #h-lab-bot .h-tag { background: #b9e27a; }
     #h-mid { position: absolute; left: 0; top: 960px; width: 1080px; height: 0; }
@@ -28,21 +32,11 @@
   </style>
   <div id="root" data-composition-id="hook" data-width="1080" data-height="1920">
     <div id="h-top" class="h-panel">
-      <!-- illustrated low-lying neighbourhood (generic, not the project) -->
-      <svg id="h-illo" viewBox="0 0 1080 960">
-        <g fill="#9bb7a2"><path d="M0 610 Q 200 560 420 600 T 1080 590 V700 H0Z"/></g>
-        <g id="h-houses">
-          <g transform="translate(150,560)"><path d="M0 70 L70 10 L140 70Z" fill="#5b6770"/><rect x="14" y="70" width="112" height="80" fill="#eef1f2"/><rect x="56" y="100" width="28" height="50" fill="#5b6770"/></g>
-          <g transform="translate(360,575)"><path d="M0 70 L70 10 L140 70Z" fill="#6e5a52"/><rect x="14" y="70" width="112" height="80" fill="#f4efe6"/><rect x="56" y="100" width="28" height="50" fill="#6e5a52"/></g>
-          <g transform="translate(570,565)"><path d="M0 70 L70 10 L140 70Z" fill="#5b6770"/><rect x="14" y="70" width="112" height="80" fill="#eef1f2"/><rect x="56" y="100" width="28" height="50" fill="#5b6770"/></g>
-          <g transform="translate(780,575)"><path d="M0 70 L70 10 L140 70Z" fill="#6e5a52"/><rect x="14" y="70" width="112" height="80" fill="#f4efe6"/><rect x="56" y="100" width="28" height="50" fill="#6e5a52"/></g>
-        </g>
-        <rect x="0" y="715" width="1080" height="245" fill="#7a9a83"/>
-        <g id="h-water">
-          <path id="h-wave1" d="M-200 20 Q -125 -20 -50 20 T 100 20 T 250 20 T 400 20 T 550 20 T 700 20 T 850 20 T 1000 20 T 1150 20 T 1300 20 T 1450 20 V40 H-200Z" fill="#5aa9f0"/>
-          <rect x="0" y="38" width="1080" height="600" fill="#2D8CFF" fill-opacity=".86"/>
-        </g>
-      </svg>
+      <!-- real flood photo: "Banjir 2007, Pagoh" by _nyem_ (Flickr), CC BY 2.0 -->
+      <img id="h-photo" src="assets/img/flood_pagoh.jpg" alt="" />
+      <div id="h-top-shade"></div>
+      <div id="h-level"><div id="h-level-line"></div><div id="h-level-tag">PARAS AIR NAIK</div></div>
+      <div id="h-credit" data-layout-ignore>Foto: _nyem_ / Flickr, CC BY 2.0</div>
     </div>
     <div id="h-bot" class="h-panel">
       <div id="h-vwrap">
@@ -69,14 +63,13 @@
   <script>
     const tl = gsap.timeline({ paused: true });
     tl.fromTo("#h-vwrap", { scale: 1.0 }, { scale: 1.12, duration: 7.25, ease: "none" }, 0);
-    tl.fromTo("#h-illo", { scale: 1.06 }, { scale: 1.0, duration: 7.25, ease: "none", transformOrigin: "50% 60%" }, 0);
+    tl.fromTo("#h-photo", { scale: 1.0 }, { scale: 1.1, duration: 7.25, ease: "none", transformOrigin: "60% 70%" }, 0);
     // "harga lebih kurang sama"
     tl.fromTo("#h-line", { scaleX: 0 }, { scaleX: 1, duration: 0.35, ease: "power3.out" }, 0);
     tl.fromTo("#h-chip", { scale: 0.4, opacity: 0, rotation: -8 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.45, ease: "back.out(2.2)" }, 0.72);
-    // "kawasan rendah": water climbs over the low houses
-    tl.fromTo("#h-water", { y: 760 }, { y: 760, duration: 0.01 }, 0);
-    tl.fromTo("#h-water", { y: 760 }, { y: 600, duration: 1.5, ease: "power2.out", immediateRender: false }, 3.2);
-    tl.fromTo("#h-wave1", { x: 0 }, { x: -300, duration: 7.25, ease: "none" }, 0);
+    // "kawasan rendah": the water-level marker climbs up the photo
+    tl.fromTo("#h-level", { y: 900, opacity: 0 }, { y: 900, opacity: 0, duration: 0.01 }, 0);
+    tl.fromTo("#h-level", { y: 900, opacity: 0 }, { y: 560, opacity: 1, duration: 1.4, ease: "power2.out", immediateRender: false }, 3.2);
     tl.fromTo("#h-lab-top .h-tag", { scale: 1 }, { scale: 1.25, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" }, 3.4);
     // "atas bukit"
     tl.fromTo("#h-lab-bot .h-tag", { scale: 1 }, { scale: 1.25, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" }, 5.05);
