@@ -1,69 +1,67 @@
 <template>
   <style>
-    #root { position: absolute; inset: 0; overflow: hidden; background: #0b1a2a; font-family: "Montserrat", sans-serif; }
-    #f-img { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
-    #f-tint { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,22,40,.78), rgba(8,22,40,.45) 50%, rgba(8,22,40,.8)); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: linear-gradient(180deg, #0b1a2a 0%, #13314f 55%, #0b1a2a 100%); font-family: "Montserrat", sans-serif; }
     #f-water { position: absolute; left: -60px; top: 0; width: 1200px; height: 2100px; }
-    #f-water .f-body { position: absolute; left: 0; top: 40px; width: 1200px; height: 2100px; background: linear-gradient(180deg, rgba(64,150,230,.96), rgba(18,60,115,1)); }
+    #f-water .f-body { position: absolute; left: 0; top: 40px; width: 1200px; height: 2100px; background: linear-gradient(180deg, rgba(64,150,230,.97), rgba(18,60,115,1)); }
     #f-wave { position: absolute; left: 0; top: 0; width: 2400px; height: 48px; }
-    #f-gauge { position: absolute; left: 130px; top: 380px; width: 150px; height: 720px; }
-    #f-tube { position: absolute; left: 0; top: 0; width: 70px; height: 720px; border-radius: 35px; border: 6px solid rgba(255,255,255,.9); overflow: hidden; background: rgba(255,255,255,.08); }
-    #f-fill { position: absolute; left: 0; bottom: 0; width: 100%; height: 100%; background: linear-gradient(0deg, #1f6fd1, #64b5ff); transform-origin: 50% 100%; }
-    .f-tick { position: absolute; left: 82px; width: 46px; height: 6px; background: rgba(255,255,255,.85); border-radius: 3px; }
-    #f-hi { position: absolute; left: 0; top: 60px; width: 70px; height: 6px; background: #FF4D4D; }
-    #f-stamp { position: absolute; left: 330px; top: 470px; width: 560px; display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
-    #f-warn { width: 150px; height: 134px; }
-    #f-title { font-weight: 900; font-size: 104px; line-height: .95; color: #fff; letter-spacing: -0.02em; }
+    #f-head { position: absolute; left: 120px; top: 320px; display: flex; align-items: center; gap: 26px; }
+    #f-warn { width: 130px; height: 116px; }
+    #f-title { font-weight: 900; font-size: 92px; line-height: .95; color: #fff; letter-spacing: -0.02em; }
     #f-title span { color: #FF5A4E; }
-    #f-check { position: absolute; left: 330px; top: 930px; display: flex; align-items: center; gap: 22px; padding: 22px 34px 22px 22px; border-radius: 26px; background: #fff; }
-    #f-box { width: 64px; height: 64px; border-radius: 16px; border: 6px solid #0b1a2a; position: relative; }
-    #f-tickmark { position: absolute; left: 4px; top: -16px; width: 76px; height: 70px; }
-    #f-check-txt { font-weight: 800; font-size: 40px; color: #0b1a2a; }
+    #f-x { position: absolute; left: 0; top: 660px; width: 1080px; height: 520px; }
+    .f-tag { position: absolute; padding: 12px 22px; border-radius: 14px; font-weight: 900; font-size: 34px; }
+    #f-tag-lo { left: 140px; top: 1070px; background: #FF5A4E; color: #fff; }
+    #f-tag-hi { left: 800px; top: 850px; background: #b9e27a; color: #1b2a1d; }
+    #f-check { position: absolute; left: 120px; top: 555px; display: flex; align-items: center; gap: 20px; padding: 18px 30px 18px 18px; border-radius: 24px; background: #fff; }
+    #f-box { width: 58px; height: 58px; border-radius: 14px; border: 6px solid #0b1a2a; position: relative; }
+    #f-tickmark { position: absolute; left: 2px; top: -16px; width: 70px; height: 64px; }
+    #f-check-txt { font-weight: 800; font-size: 38px; color: #0b1a2a; }
   </style>
   <div id="root" data-composition-id="flood" data-width="1080" data-height="1920">
-    <img id="f-img" src="assets/img/front.jpg" alt="" />
-    <div id="f-tint"></div>
-    <div id="f-gauge">
-      <div id="f-tube"><div id="f-fill"></div><div id="f-hi"></div></div>
-      <div class="f-tick" style="top:60px;background:#FF4D4D"></div>
-      <div class="f-tick" style="top:240px"></div>
-      <div class="f-tick" style="top:420px"></div>
-      <div class="f-tick" style="top:600px"></div>
-    </div>
-    <div id="f-stamp">
+    <div id="f-head">
       <svg id="f-warn" viewBox="0 0 150 134"><path d="M75 8 L144 126 H6 Z" fill="#FF5A4E" stroke="#fff" stroke-width="8" stroke-linejoin="round"/><rect x="68" y="44" width="14" height="46" rx="7" fill="#fff"/><circle cx="75" cy="106" r="9" fill="#fff"/></svg>
       <div id="f-title">RISIKO<br/><span>BANJIR</span></div>
     </div>
     <div id="f-check">
       <div id="f-box"><svg id="f-tickmark" viewBox="0 0 76 70"><path d="M8 36 L30 58 L70 10" stroke="#2fbf71" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round" pathLength="100" stroke-dasharray="100 120"/></svg></div>
-      <div id="f-check-txt">Wajib ambil kira</div>
+      <div id="f-check-txt">Perkara wajib ambil kira</div>
     </div>
+    <!-- terrain cross-section: low land (left) vs hill (right) -->
+    <svg id="f-x" viewBox="0 0 1080 520">
+      <g transform="translate(150,330)"><path d="M0 50 L50 8 L100 50Z" fill="#8b98a3"/><rect x="10" y="50" width="80" height="56" fill="#dfe6ea"/></g>
+      <g transform="translate(300,330)"><path d="M0 50 L50 8 L100 50Z" fill="#8b98a3"/><rect x="10" y="50" width="80" height="56" fill="#dfe6ea"/></g>
+      <g id="f-lvl"><rect x="0" y="0" width="1080" height="520" fill="#2D8CFF" fill-opacity=".85"/><rect x="0" y="0" width="1080" height="8" fill="#9fd0ff"/></g>
+      <path d="M0 436 L560 436 C 640 436 660 160 760 130 C 840 108 960 110 1080 118 V520 H0Z" fill="#4f7a55"/>
+      <path d="M0 436 L560 436 C 640 436 660 160 760 130 C 840 108 960 110 1080 118" fill="none" stroke="#b9e27a" stroke-width="6"/>
+      <g transform="translate(790,32)"><path d="M0 50 L50 8 L100 50Z" fill="#3b4248"/><rect x="10" y="50" width="80" height="56" fill="#f3f3f0"/></g>
+      <g transform="translate(920,32)"><path d="M0 50 L50 8 L100 50Z" fill="#3b4248"/><rect x="10" y="50" width="80" height="56" fill="#f3f3f0"/></g>
+    </svg>
+    <div class="f-tag" id="f-tag-lo">RENDAH</div>
+    <div class="f-tag" id="f-tag-hi">TINGGI</div>
     <div id="f-water">
-      <svg id="f-wave" viewBox="0 0 2400 48" preserveAspectRatio="none"><path d="M0 40 Q 75 0 150 40 T 300 40 T 450 40 T 600 40 T 750 40 T 900 40 T 1050 40 T 1200 40 T 1350 40 T 1500 40 T 1650 40 T 1800 40 T 1950 40 T 2100 40 T 2250 40 T 2400 40 V48 H0Z" fill="rgba(120,190,255,.96)"/></svg>
+      <svg id="f-wave" viewBox="0 0 2400 48" preserveAspectRatio="none"><path d="M0 40 Q 75 0 150 40 T 300 40 T 450 40 T 600 40 T 750 40 T 900 40 T 1050 40 T 1200 40 T 1350 40 T 1500 40 T 1650 40 T 1800 40 T 1950 40 T 2100 40 T 2250 40 T 2400 40 V48 H0Z" fill="rgba(120,190,255,.97)"/></svg>
       <div class="f-body"></div>
     </div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-    // water from the hook drains away
-    tl.fromTo("#f-water", { y: -60 }, { y: 1960, duration: 0.7, ease: "power2.in" }, 0.0);
+    // the hook's water drains away to reveal the cross-section
+    tl.fromTo("#f-water", { y: -60 }, { y: 1960, duration: 0.7, ease: "power2.in" }, 0);
     tl.fromTo("#f-wave", { x: 0 }, { x: -400, duration: 0.7, ease: "none" }, 0);
-    tl.fromTo("#f-img", { scale: 1.15 }, { scale: 1.02, duration: 5.2, ease: "power1.out" }, 0);
-    // gauge appears, then floods at "banjir"
-    tl.fromTo("#f-gauge", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 0.55);
-    tl.fromTo("#f-fill", { scaleY: 0.08 }, { scaleY: 0.25, duration: 0.6, ease: "power2.out" }, 0.7);
-    tl.fromTo("#f-fill", { scaleY: 0.25 }, { scaleY: 0.93, duration: 0.9, ease: "power2.inOut" }, 1.75);
-    tl.fromTo("#f-fill", { background: "linear-gradient(0deg, #1f6fd1, #64b5ff)" }, { background: "linear-gradient(0deg, #b4231a, #FF5A4E)", duration: 0.4 }, 2.4);
-    // "risiko banjir" title slams
+    tl.fromTo("#f-x", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.45);
+    tl.fromTo(["#f-tag-lo", "#f-tag-hi"], { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, stagger: 0.15, ease: "back.out(2)" }, 0.8);
+    // "risiko banjir": low land floods, the hill stays dry
+    tl.fromTo("#f-lvl", { y: 520 }, { y: 520, duration: 0.01 }, 0);
+    tl.fromTo("#f-lvl", { y: 520 }, { y: 360, duration: 1.3, ease: "power2.inOut", immediateRender: false }, 1.6);
     tl.fromTo("#f-warn", { scale: 0, rotation: -30 }, { scale: 1, rotation: 0, duration: 0.4, ease: "back.out(2.5)" }, 1.66);
     tl.fromTo("#f-title", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power4.out" }, 1.72);
     tl.fromTo("#f-title span", { scale: 1.6 }, { scale: 1, duration: 0.25, ease: "power4.out" }, 2.04);
-    tl.fromTo("#f-warn", { opacity: 1 }, { opacity: 0.45, duration: 0.2, yoyo: true, repeat: 5, ease: "none" }, 2.4);
-    // "patut kita ambil kira" — check box ticks
-    tl.fromTo("#f-check", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 3.6);
+    tl.fromTo("#f-tag-lo", { x: 0 }, { x: 10, duration: 0.06, yoyo: true, repeat: 5, ease: "none", immediateRender: false }, 2.5);
+    // "patut kita ambil kira"
+    tl.fromTo("#f-check", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 3.6);
     tl.fromTo("#f-tickmark path", { strokeDashoffset: 110 }, { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, 4.1);
-    // tilt-up whip toward the hill
-    tl.fromTo(["#f-stamp", "#f-check", "#f-gauge", "#f-img", "#f-tint"], { y: 0 }, { y: 1400, duration: 0.32, ease: "power3.in" }, 4.83);
+    // whip up toward the hill
+    tl.fromTo(["#f-head", "#f-check", "#f-x", ".f-tag"], { y: 0 }, { y: 1500, duration: 0.32, ease: "power3.in", immediateRender: false }, 4.83);
     window.__timelines["flood"] = tl;
   </script>
 </template>

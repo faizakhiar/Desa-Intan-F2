@@ -1,65 +1,58 @@
 <template>
   <style>
     #root { position: absolute; inset: 0; overflow: hidden; background: #0f1a14; font-family: "Montserrat", sans-serif; }
-    /* MAP SLOT: replace #l-map contents with the baked satellite map video once tiles are reachable */
-    #l-map { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; background: #1c2a22; }
-    #l-map-img { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; opacity: .55; }
-    #l-map-note { position: absolute; left: 120px; top: 1080px; padding: 10px 18px; border: 3px dashed rgba(255,255,255,.7); border-radius: 12px; color: rgba(255,255,255,.85); font-weight: 700; font-size: 28px; }
-    #l-head { position: absolute; left: 120px; top: 310px; font-weight: 900; font-size: 92px; line-height: .95; color: #fff; letter-spacing: -0.02em; }
+    #l-mw { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    #l-map { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+    #l-dim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,10,8,.65) 0%, rgba(5,10,8,.15) 30%, rgba(5,10,8,.15) 75%, rgba(5,10,8,.55) 100%); }
+    #l-head { position: absolute; left: 120px; top: 300px; font-weight: 900; font-size: 84px; line-height: .95; color: #fff; letter-spacing: -0.02em; }
     #l-head span { color: #b9e27a; }
-    .l-card { position: absolute; left: 120px; width: 768px; height: 220px; border-radius: 30px; background: #fff; overflow: hidden; }
-    #l-c1 { top: 560px; }
-    #l-c2 { top: 810px; }
-    .l-dest { position: absolute; left: 36px; top: 30px; font-weight: 900; font-size: 50px; color: #1b2a1d; }
-    .l-time { position: absolute; right: 40px; top: 26px; font-weight: 900; font-size: 66px; white-space: nowrap; color: #1b2a1d; letter-spacing: -0.03em; }
-    .l-time small { font-size: 30px; font-weight: 800; margin-left: 6px; }
-    .l-road { position: absolute; left: 36px; top: 150px; width: 696px; height: 12px; border-radius: 6px; background: #e4e8e1; }
-    .l-prog { position: absolute; left: 0; top: 0; width: 696px; height: 12px; border-radius: 6px; transform-origin: 0 50%; }
-    #l-c1 .l-prog { background: #2fbf71; }
-    #l-c2 .l-prog { background: #FFC24B; }
-    .l-car { position: absolute; left: 6px; top: 128px; width: 70px; height: 56px; }
-    .l-flag { position: absolute; right: 26px; top: 120px; width: 40px; height: 56px; }
+    #l-ov { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    .l-chip { position: absolute; padding: 14px 22px; border-radius: 20px; background: #fff; color: #1b2a1d; }
+    .l-chip b { display: block; font-weight: 900; font-size: 52px; line-height: 1; letter-spacing: -0.02em; }
+    .l-chip b small { font-size: 28px; margin-left: 4px; }
+    .l-chip i { display: block; font-style: normal; font-weight: 800; font-size: 28px; margin-top: 4px; }
+    #l-c1 { left: 400px; top: 1040px; border-left: 12px solid #2fbf71; }
+    #l-c2 { left: 650px; top: 1075px; border-left: 12px solid #FFC24B; }
+    #l-proj { position: absolute; left: 265px; top: 560px; padding: 10px 18px; border-radius: 14px; background: #FF5A4E; color: #fff; font-weight: 900; font-size: 30px; }
+    #l-credit { position: absolute; left: 120px; top: 1262px; padding: 4px 10px; border-radius: 6px; background: rgba(0,0,0,.55); color: rgba(255,255,255,.8); font-weight: 600; font-size: 18px; }
   </style>
   <div id="root" data-composition-id="location" data-width="1080" data-height="1920">
-    <div id="l-map">
-      <img id="l-map-img" src="assets/img/aerial.jpg" alt="" />
-      <div id="l-map-note">PLACEHOLDER — peta satelit sebenar akan diletak di sini</div>
-    </div>
+    <div id="l-mw"><video id="l-map" class="clip" src="assets/video/loc.mp4" data-start="0" data-duration="6.5" data-track-index="0" muted playsinline></video></div>
+    <div id="l-dim"></div>
+    <!-- screen positions projected from the map's held view (z 11.9 @ 101.462,3.118) -->
+    <svg id="l-ov" viewBox="0 0 1080 1920" fill="none">
+      <path id="l-r1s" d="M240 634 C 330 760 430 900 537 1008" stroke="#2fbf71" stroke-width="10" stroke-linecap="round" pathLength="100" stroke-dasharray="100 120"/>
+      <path id="l-r2s" d="M240 634 C 420 760 700 980 846 1201" stroke="#FFC24B" stroke-width="10" stroke-linecap="round" pathLength="100" stroke-dasharray="100 120"/>
+      <g id="l-p0"><circle cx="240" cy="634" r="26" fill="#FF5A4E" stroke="#fff" stroke-width="8"/></g>
+      <g id="l-p1"><circle cx="537" cy="1008" r="20" fill="#2fbf71" stroke="#fff" stroke-width="7"/></g>
+      <g id="l-p2"><circle cx="846" cy="1201" r="20" fill="#FFC24B" stroke="#fff" stroke-width="7"/></g>
+    </svg>
+    <div id="l-proj">PROJEK</div>
+    <div class="l-chip" id="l-c1"><b>±20<small>MINIT</small></b><i>Setia Alam</i></div>
+    <div class="l-chip" id="l-c2"><b>±25<small>MINIT</small></b><i>Shah Alam</i></div>
     <div id="l-head">LOKASI<br/><span>PRAKTIKAL</span></div>
-    <div class="l-card" id="l-c1">
-      <div class="l-dest">Setia Alam</div>
-      <div class="l-time"><span id="l-t1">20</span><small>MINIT</small></div>
-      <div class="l-road"><div class="l-prog" id="l-p1"></div></div>
-      <svg class="l-car" id="l-car1" viewBox="0 0 70 56"><rect x="4" y="18" width="62" height="24" rx="10" fill="#1b2a1d"/><path d="M16 18 L24 6 H46 L54 18 Z" fill="#1b2a1d"/><circle cx="18" cy="44" r="8" fill="#2fbf71"/><circle cx="52" cy="44" r="8" fill="#2fbf71"/></svg>
-      <svg class="l-flag" viewBox="0 0 40 56"><rect x="4" y="2" width="5" height="52" fill="#1b2a1d"/><path d="M9 4 H36 L28 14 L36 24 H9 Z" fill="#2fbf71"/></svg>
-    </div>
-    <div class="l-card" id="l-c2">
-      <div class="l-dest">Shah Alam</div>
-      <div class="l-time"><span id="l-t2">25</span><small>MINIT</small></div>
-      <div class="l-road"><div class="l-prog" id="l-p2"></div></div>
-      <svg class="l-car" id="l-car2" viewBox="0 0 70 56"><rect x="4" y="18" width="62" height="24" rx="10" fill="#1b2a1d"/><path d="M16 18 L24 6 H46 L54 18 Z" fill="#1b2a1d"/><circle cx="18" cy="44" r="8" fill="#FFC24B"/><circle cx="52" cy="44" r="8" fill="#FFC24B"/></svg>
-      <svg class="l-flag" viewBox="0 0 40 56"><rect x="4" y="2" width="5" height="52" fill="#1b2a1d"/><path d="M9 4 H36 L28 14 L36 24 H9 Z" fill="#FFC24B"/></svg>
-    </div>
+    <div id="l-credit" data-layout-ignore>Imej: Esri, Maxar, Earthstar Geographics</div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-    tl.fromTo("#l-map", { x: 1080 }, { x: 0, duration: 0.4, ease: "power3.out" }, 0);
-    tl.fromTo("#l-map-img", { scale: 1.0 }, { scale: 1.12, duration: 6.5, ease: "none" }, 0);
-    // "Lokasinya pun praktikal"
+    tl.fromTo("#l-mw", { x: 1080 }, { x: 0, duration: 0.4, ease: "power3.out" }, 0);
+    // "Lokasinya pun praktikal" while the camera pulls out from the site
     tl.fromTo("#l-head", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power4.out" }, 0.15);
     tl.fromTo("#l-head span", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0.95);
+    tl.fromTo("#l-credit", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.4);
+    // map holds at 2.6 s: project pin
+    tl.fromTo("#l-p0", { scale: 0, transformOrigin: "240px 634px" }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, 2.6);
+    tl.fromTo("#l-proj", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.25 }, 2.65);
     // "Ke Setia Alam sekitar 20 minit"
-    tl.fromTo("#l-c1", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 1.7);
-    tl.fromTo("#l-p1", { scaleX: 0 }, { scaleX: 1, duration: 1.2, ease: "power1.inOut" }, 1.85);
-    tl.fromTo("#l-car1", { x: 0 }, { x: 620, duration: 1.2, ease: "power1.inOut" }, 1.85);
-    tl.fromTo("#l-c1 .l-time", { scale: 1.4 }, { scale: 1, duration: 0.3, ease: "back.out(2)" }, 2.98);
+    tl.fromTo("#l-r1s", { strokeDashoffset: 100 }, { strokeDashoffset: 0, duration: 0.55, ease: "power2.inOut" }, 2.7);
+    tl.fromTo("#l-p1", { scale: 0, transformOrigin: "537px 1008px" }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, 3.2);
+    tl.fromTo("#l-c1", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.2)" }, 2.98);
     // "Bandar Shah Alam pula anggaran 25 minit"
-    tl.fromTo("#l-c2", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 4.0);
-    tl.fromTo("#l-p2", { scaleX: 0 }, { scaleX: 1, duration: 1.3, ease: "power1.inOut" }, 4.15);
-    tl.fromTo("#l-car2", { x: 0 }, { x: 620, duration: 1.3, ease: "power1.inOut" }, 4.15);
-    tl.fromTo("#l-c2 .l-time", { scale: 1.4 }, { scale: 1, duration: 0.3, ease: "back.out(2)" }, 5.46);
-    // exit: zoom-through
-    tl.fromTo(["#l-head", "#l-c1", "#l-c2"], { scale: 1, opacity: 1 }, { scale: 1.6, opacity: 0, duration: 0.3, ease: "power2.in", immediateRender: false }, 6.2);
+    tl.fromTo("#l-r2s", { strokeDashoffset: 100 }, { strokeDashoffset: 0, duration: 0.8, ease: "power2.inOut" }, 4.1);
+    tl.fromTo("#l-p2", { scale: 0, transformOrigin: "846px 1201px" }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, 4.85);
+    tl.fromTo("#l-c2", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.2)" }, 5.46);
+    // exit
+    tl.fromTo(["#l-head", "#l-c1", "#l-c2", "#l-ov", "#l-proj"], { scale: 1, opacity: 1 }, { scale: 1.4, opacity: 0, duration: 0.3, ease: "power2.in", immediateRender: false }, 6.2);
     window.__timelines["location"] = tl;
   </script>
 </template>

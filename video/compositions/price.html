@@ -21,7 +21,7 @@
     #r-note { font-weight: 700; font-size: 28px; color: #7a6f5a; margin-top: 14px; text-align: right; }
   </style>
   <div id="root" data-composition-id="price" data-width="1080" data-height="1920">
-    <img id="r-img" src="assets/img/corner.jpg" alt="" />
+    <div id="r-img"><video id="r-img-v" class="clip" src="assets/video/price_bg.mp4" data-start="0" data-duration="10.13" data-media-start="0" data-track-index="0" muted playsinline style="position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover"></video></div>
     <div id="r-shade"></div>
     <div id="r-paperwrap">
       <div id="r-paper">
@@ -38,7 +38,7 @@
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-    tl.fromTo("#r-img", { scale: 1.25 }, { scale: 1.05, duration: 10.1, ease: "none" }, 0);
+    tl.fromTo("#r-img", { scale: 1.12 }, { scale: 1.0, duration: 10.1, ease: "none" }, 0);
     tl.fromTo("#r-printer", { y: -200, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 0);
     // receipt prints in steps, each step lands as the voice names it
     // receipt prints downward; each step lands as the voice names it
